@@ -1,11 +1,17 @@
-function main() {
-  var doc =  DocumentApp.openById("1xBz5ZMBk5aI4Gck8M-bHu26ZmbPGx6nBfZmqnTg9mRU")// DocumentApp.getActiveDocument();
+
+function CountUniqueWords() {
+  var doc = DocumentApp.getActiveDocument();
   var body = doc.getBody();
   var paragraphs = body.getParagraphs();
-  
+
+
   var wordmap = countAllWords(paragraphs)
-  
-  PrintMap(wordmap)
+
+  let objWordMap = {};
+  for (let [key, value] of wordmap.entries()) {
+    objWordMap[key] = value;
+  }
+  return objWordMap
 }
 
 function countAllWords(paragraphs){
@@ -22,15 +28,15 @@ function countAllWords(paragraphs){
       }
       else {
         wordmap.set(word, 1);
-
       }
     }
   }
   return wordmap
 }
 
-function PrintMap(map){
+function Display(map){
   for (let [key, value] of map) {
     Logger.log(key + ': ' + value);
   }
 }
+

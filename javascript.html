@@ -1,0 +1,25 @@
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+      
+      google.script.run.withSuccessHandler((words) => {
+       
+        const body = document.getElementById("body")
+        const ul = document.createElement("ul")
+        ul.id = "ul"
+        body.appendChild(ul)
+        console.log(words)
+        for (var word in words) {
+          
+          createAndAppend(ul, word, words[word])
+        }
+      }).CountUniqueWords()
+  }, false);
+
+  function createAndAppend(ul, word, number){
+    const li = document.createElement("li")
+    li.textContent = `${word}: ${number}`
+    ul.appendChild(li)
+  }
+
+</script>
