@@ -27,7 +27,10 @@
         const tbody = document.createElement("tbody")
         table.appendChild(tbody)
 
-        for (var word in words) {
+        sorted = Object.keys(words).sort(function(a,b){return words[b]-words[a]})
+
+        for (var word of sorted) {
+          console.log(word)
           createAndAppend(tbody, word, words[word])
         }
       }).CountUniqueWords()
