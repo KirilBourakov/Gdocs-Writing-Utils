@@ -3,7 +3,6 @@
   document.addEventListener('DOMContentLoaded', function() {
       
       google.script.run.withSuccessHandler((words) => {
-       
         const body = document.getElementById("body")
 
         // table
@@ -28,9 +27,9 @@
         table.appendChild(tbody)
 
         sorted = Object.keys(words).sort(function(a,b){return words[b]-words[a]})
-
+        total = 0
         for (var word of sorted) {
-          console.log(word)
+          total += words[word]
           createAndAppend(tbody, word, words[word])
         }
       }).CountUniqueWords()
