@@ -2,22 +2,22 @@
 function CountUniqueWords() {
   var paragraphs = getBodyParagraphs()
 
-  wordmap = {};
-  for (var i = 0; i < paragraphs.length; i++) {
-    parText = paragraphs[i].getText()
-    var words = parText.split(/\s+/);
-    for (var j = 0; j < words.length; j++) {
-      var word = removePunctuation(words[j].toLowerCase())
-      if (word in wordmap) {
-        wordmap[word]++
-      }
-      else {
-        wordmap[word] = 1
+  let wordMap = {};
+  for (const paragraph of paragraphs) {
+    const text = paragraph.getText();
+    const words = text.split(/\s+/);
+    
+    for (const word of words) {
+      const cleanedWord = removePunctuation(word.toLowerCase());
+      
+      if (wordMap.hasOwnProperty(cleanedWord)) {
+        wordMap[cleanedWord]++;
+      } else {
+        wordMap[cleanedWord] = 1;
       }
     }
   }
-
-  return wordmap
+  return wordMap
 }
 
 function FindContractions(){
@@ -25,20 +25,20 @@ function FindContractions(){
 
   var contractions = getContractions()
   var contractionsFound = {}
-  for (var i = 0; i < paragraphs.length; i++) {
+  for (const paragraph of paragraphs) {
 
-    parText = paragraphs[i].getText()
+    parText = paragraph.getText()
     var words = parText.split(/\s+/);
 
-    for (var j = 0; j < words.length; j++) {
-      var word = String(removePunctuation(words[j].toLowerCase()))
+    for (const word of words) {
+      var cleanword = String(removePunctuation(word.toLowerCase()))
       
-      if (word in contractions && word in contractionsFound) {
-        contractionsFound[word]['count'] += 1
-      } else if (word in contractions) {
-        contractionsFound[word] = {
+      if (cleanword in contractions && cleanword in contractionsFound) {
+        contractionsFound[cleanword]['count'] += 1
+      } else if (cleanword in contractions) {
+        contractionsFound[cleanword] = {
           'count': 1,
-          'from': contractions[word]
+          'from': contractions[cleanword]
         }
       }
     }
