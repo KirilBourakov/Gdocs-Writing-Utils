@@ -10,46 +10,19 @@
         table.classList.add("table");
         body.appendChild(table)
 
-        const thead = document.createElement("thead")
-        const th1 = document.createElement("th")
-        const th2 = document.createElement("th")
-        th1.scope = "col"
-        th2.scope = "col"
-        th1.classList.add('p-2')
-        th2.classList.add('p-2')
-        th1.textContent = "Word"
-        th2.textContent = "Number"
-        thead.appendChild(th1)
-        thead.appendChild(th2)
-        table.appendChild(thead)
-
+      
         const tbody = document.createElement("tbody")
+        table.appendChild(genericTableHeadMaker(['Word', 'Number'], [], 'col'))
         table.appendChild(tbody)
+
 
         sorted = Object.keys(words).sort(function(a,b){return words[b]-words[a]})
         total = 0
         for (var word of sorted) {
           total += words[word]
-          createAndAppend(tbody, word, words[word])
+          tbody.appendChild(genericTableRowMaker(word, [words[word]], "row", `wordcounter-${word}`))
         }
+        console.log(total)
       }).CountUniqueWords()
   }, false);
-
-  function createAndAppend(tbody, word, number){
-    const tr = document.createElement("tr")
-    const th = document.createElement("th")
-    th.scope = "row"
-    const td2 = document.createElement("td")
-
-    th.textContent = word
-    td2.textContent = number
-
-    tr.id = `wordcounter-${word}`
-    tr.appendChild(th)
-    tr.appendChild(td2)
-
-
-    tbody.appendChild(tr)
-  }
-
 </script>

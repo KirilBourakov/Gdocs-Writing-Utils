@@ -1,0 +1,32 @@
+<script>
+  function genericTableHeadMaker(thTextContent, thClassList, scope){
+    const thead = document.createElement("thead")
+    const tr = document.createElement("tr")
+    for (var textcontent of thTextContent){
+      const th = document.createElement("th")
+      th.scope = scope
+      th.classList.add(...thClassList)
+      th.textContent = textcontent
+      tr.appendChild(th)
+    }
+    thead.appendChild(tr)
+    return thead
+  }
+
+  function genericTableRowMaker(thText, tdText, thScope, trId){
+    const tr = document.createElement("tr")
+    tr.id = trId
+
+    const th = document.createElement("th")
+    th.scope = thScope
+    th.textContent = thText
+    tr.appendChild(th)
+
+    for (var text of tdText){
+      const td = document.createElement("td")
+      td.textContent = text
+      tr.appendChild(td)
+    }
+    return tr
+  }
+</script>
