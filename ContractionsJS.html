@@ -2,6 +2,26 @@
    document.addEventListener('DOMContentLoaded', function() {
       google.script.run.MakeContractionListProperity()
       google.script.run.withSuccessHandler((words) => {
+        const body = document.getElementById("body")
+
+        // table
+        const table = document.createElement("table")
+        table.classList.add("table");
+        body.appendChild(table)
+
+        // tbody
+        const tbody = document.createElement("tbody")
+        table.appendChild(genericTableHeadMaker(['Contraction', 'Number'], [], 'col'))
+        table.appendChild(tbody)
+
+
+        sorted = Object.keys(words).sort(function(a,b){return words[b]['count']-words[a]['count']})
+        total = 0
+        for (var word of sorted) {
+          total += words[word]
+          tbody.appendChild(genericTableRowMaker(word, [words[word]['count']], "row", `wordcounter-${word}`))
+        }
+        console.log(total)
       }).FindContractions()
    })
 </script>
